@@ -1,6 +1,6 @@
 # Modem HAT for the Raspberry Pi
 
-This HAT connects the Raspberry Pi to a plain old telephone line.
+This HAT is a modem that connects the Raspberry Pi to a plain old analog telephone line.
 
 ![Render of Modem HAT](images/modem-hat-2022-05-08-render.png)
 
