@@ -11,7 +11,7 @@ closely follows the circuits described in [AN93](https://www.skyworksinc.com/-/m
 
 **NOTE: Whatever your jurisdiction, we're pretty positive that connecting this device to the public phone system IS NOT LEGAL! Don't blame us if you get into trouble.**
 
-## Raspberry Pi configuration and modem reset
+## Raspberry Pi Configuration
 
 The modem connects to the Raspberry Pi UART4 and requires RTS/CTS flow control. To enable UART4 with RTS/CTS, edit `/boot/config.txt` and add the following line:
 `dtoverlay=uart4,ctsrts`
@@ -19,7 +19,11 @@ After rebooting the Raspberry Pi, the UART4 will be mapped to `ttyAMAx`, where `
 
 The modem is configured for automatic baudrate detection, supporting any standard DTE rate up to 307.2 kps.
 
-Before first use after power-up, the modem must be reset by the Raspberry Pi. To reset the modem, GPIO25 (pin 22) is set low for at least 500ms, then set high, followed by a delay of at least 300ms. This can be done with the following Python script.
+## Modem Reset
+
+Before first use after power-up, the modem must be reset by the Raspberry Pi.
+
+To reset the modem, GPIO25 (pin 22) is set low for at least 500ms, then set high, followed by a delay of at least 300ms. This can be done with the following Python script.
 ```
 import RPi.GPIO as GPIO
 import time
@@ -30,6 +34,14 @@ time.sleep(0.5)
 GPIO.output(25, GPIO.HIGH)
 time.sleep(0.3)
 ```
+
+By default, the modem is configured for operation in the United States. For other countries the modem will need to be reconfigured after reset. See [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 6.2 for details. 
+
+## AT Command Set
+
+The modem supports the [basic Hayes command](https://en.wikipedia.org/wiki/Hayes_command_set#The_basic_Hayes_command_set) set.
+
+For a complete list of supported AT commands as well as configuration registers refer to [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapters 5.4 through 5.7. 
 
 ## Raspberry Pi GPIO Pinout
 
