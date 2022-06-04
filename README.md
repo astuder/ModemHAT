@@ -13,11 +13,11 @@ closely follows the circuits described in application note [AN93](https://www.sk
 
 ## Raspberry Pi Configuration
 
-The modem connects to the Raspberry Pi UART4 and requires RTS/CTS flow control. To enable UART4 with RTS/CTS, edit `/boot/config.txt` and add the following line:
+The modem connects to the Raspberry Pi UART4 and requires CTS and RTS for flow control. To enable UART4 with CTS/RTS, edit `/boot/config.txt` and add the following line:
 
 `dtoverlay=uart4,ctsrts`
 
-After rebooting the Raspberry Pi, the UART4 will be mapped to `ttyAMAx`, where `x` depends on the number of enabled UARTs. Typically, if only UART0 and UART4 are enabled, UART4 will be on `/dev/ttyAMA1`.
+After rebooting the Raspberry Pi, UART4 will be mapped to `/dev/ttyAMAx`, where `x` depends on the number of enabled UARTs. Typically, if only UART0 and UART4 are enabled, UART4 will be on `/dev/ttyAMA1`.
 
 The modem is configured for automatic baudrate detection, supporting any standard DTE rate up to 307.2 kps.
 
@@ -42,7 +42,7 @@ By default, the modem is configured for operation in the United States. For othe
 
 ## AT Command Set
 
-The modem supports the [basic Hayes command](https://en.wikipedia.org/wiki/Hayes_command_set#The_basic_Hayes_command_set) set.
+The modem supports the [basic Hayes command set](https://en.wikipedia.org/wiki/Hayes_command_set#The_basic_Hayes_command_set).
 
 For a complete list of supported AT commands as well as configuration registers refer to [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapters 5.4 through 5.7. 
 
