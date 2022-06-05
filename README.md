@@ -75,7 +75,7 @@ Usually the modem boot config and interrupt pins are not electrically connected 
 
 ### General
 
-Large parts of the HAT are based on the hardware design reference in [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 4. Where applicable, identical component designators are used.
+Large parts of the HAT are based on the hardware design reference in application note [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 4. Where applicable, identical component designators are used to simplify cross-referencing. 
 
 I used solder paste, stencil and reflow oven for assembly of my HAT. If you plan to hand-solder your unit, you may want to replace U3, the only QFN part, with a 74LVC541 in TSSOP-20 package.
 
@@ -95,9 +95,9 @@ Some resistors in the provided layout are higher power and therefore larger than
 
 ### Audio Output / Speaker
 
-The audio output is optional and allows monitoring of connection progress via a speaker, and who doesn't the old-school sounds of two dial-up modems negotiating a session.
+The audio output is optional and allows monitoring of connection progress via a speaker, and who doesn't  love the old-school sounds of two dial-up modems negotiating a session. It's half the reason to build this project! :)
 
-The auto amplifier LM4819 (U4) can be substituted with the higher power, pin-compatible LM4862.
+The audio amplifier LM4819 (U4) can be substituted with the higher power, pin-compatible LM4862. Cheap, off-brand substitutes are probably fine too.
 
 As alternative to the JST connector J3, a small speaker can be directly soldered to the pads and afixed to the circuit board with double-sided tape.
 
@@ -113,8 +113,8 @@ If this functionality is not needed, the EEPROM (U6) and associated parts (C22, 
 
 ### Raspberry Pi HAT ID EEPROM
 
-The HAT ID EEPROM is optional and can store information that allows the Raspberry Pi to recognize the HAT and load the required device tree overlay, i.e. automatically configure UART and other pins.
+The HAT ID EEPROM is optional and can store information that allows the Raspberry Pi to recognize the HAT and load the required device tree overlay, i.e. automatically configure UART4 and other pins.
 
-I haven't figured out the approriate content for this EEPROM yet. Specification is [here](https://github.com/raspberrypi/hats/blob/master/eeprom-format.md). Contributions are welcome :)
+I haven't figured out the content for this EEPROM yet. Specification is [here](https://github.com/raspberrypi/hats/blob/master/eeprom-format.md). Contributions are welcome :)
 
 If this functionality is not needed, the EEPROM (U5) and associated parts (C21, R14, R25) can be left unpopulated.
