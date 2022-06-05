@@ -4311,6 +4311,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid c4aab532-438e-48c5-96a3-46d009f65785)
   )
+  (text "Substitutes: LM4819, LM4862" (at 142.24 264.16 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid ce9d24e9-cb11-44a2-b7b3-21c89a9049ea)
+  )
   (text "RPi UART:\nTX,RTS output\nRX,CTS input\n" (at 27.94 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid ecfae462-c428-47f4-8140-6216f826f741)
@@ -5616,7 +5620,7 @@
     (property "Reference" "J3" (id 0) (at 165.1 243.8399 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "8R" (id 1) (at 165.1 246.3799 0)
+    (property "Value" "SPEAKER" (id 1) (at 165.1 246.3799 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (id 2) (at 160.02 248.92 0)
@@ -7594,7 +7598,7 @@
       (reference "J2") (unit 1) (value "2x20 0.1\" Stacking Header") (footprint "ModemHAT:Raspberry_Pi_Stacking_Header")
     )
     (path "/6effeffe-d42d-4a4b-9f82-74cae02f5e28"
-      (reference "J3") (unit 1) (value "8R") (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical")
+      (reference "J3") (unit 1) (value "SPEAKER") (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical")
     )
     (path "/a1821338-ea80-47ff-948f-c44a9f05bfce"
       (reference "Q1") (unit 1) (value "NPN 300V 0.5A") (footprint "Package_TO_SOT_SMD:SOT-23")
