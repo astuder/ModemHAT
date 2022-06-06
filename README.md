@@ -79,8 +79,6 @@ Large parts of the HAT are based on the hardware design reference in application
 
 I used solder paste, stencil and reflow oven for assembly of my HAT. If you plan to hand-solder your unit, you may want to replace U3, the only QFN part, with a 74LVC541 in TSSOP-20 package.
 
-For bring-up and troubleshooting of the modem portion of the circuit, refer to [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 10.1. 
-
 ### Modem
 
 The modem chipset consists of the digital part Si2457 (U1) and analog part Si3018 (U2).
@@ -94,6 +92,8 @@ If you suspect that you're stuck with an old part, you could try using a 4.9152 
 On the analog side, most of the resistors, capacitors, diodes and transistors have critical voltage, current and/or power ratings. These are all called out in the schematic. See bill of material in [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 4.3 for full details. 
 
 Some resistors in the provided layout are higher power and therefore larger than needed due to availability when I built my board. When ordering parts, double-check the footprints and adjust the layout if needed. 
+
+For bring-up and troubleshooting of the modem portion of the circuit, refer to [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 10.1. 
 
 ### Audio Output / Speaker
 
