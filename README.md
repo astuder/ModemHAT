@@ -13,7 +13,7 @@ closely follows the circuits described in application note [AN93](https://www.sk
 
 ## Raspberry Pi Configuration
 
-The modem HAT requires a Raspberry 4 or newer. 
+The modem HAT requires a Raspberry Pi 4 or newer. 
 
 The modem connects to the Raspberry Pi UART4 and requires CTS and RTS for flow control. To enable UART4 with CTS/RTS, edit `/boot/config.txt` and add the following line:
 
