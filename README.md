@@ -13,6 +13,8 @@ closely follows the circuits described in application note [AN93](https://www.sk
 
 ## Raspberry Pi Configuration
 
+The modem HAT requires a Raspberry 4 or newer. 
+
 The modem connects to the Raspberry Pi UART4 and requires CTS and RTS for flow control. To enable UART4 with CTS/RTS, edit `/boot/config.txt` and add the following line:
 
 `dtoverlay=uart4,ctsrts`
@@ -104,6 +106,8 @@ The audio amplifier LM4819 (U4) can be substituted with the higher power, pin-co
 As alternative to the JST connector J3, a small speaker can be directly soldered to the pads and afixed to the circuit board with double-sided tape.
 
 If this functionality is not needed, the audio amplifier (U4) and associated parts (C12-C19, R19-R24, SW1, J3) can be left unpopulated.
+
+To enable audio output on the speaker, make sure MUTE switch is set towards the LEDs. The AT command to enable speaker output while dialing and handshaking is ATM1. Speaker volume is controlled with ATL1 through ATL4, where 4 is the loudest.
 
 ### Modem Boot Config EEPROM
 
