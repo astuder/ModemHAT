@@ -9,6 +9,8 @@ The modem presents itself to the Raspberry Pi on UART4 and is controlled with th
 The design is based on a [Skyworks ISOmodem](https://www.skyworksinc.com/en/Products/Modems-and-DAAs/Data-and-Voice-Modems) chipset, specifically [Si2457](https://www.skyworksinc.com/en/Products/Modems-and-DAAs/Data-and-Voice-Modems/Si2457) data modem and Si3018 line side driver. The implementation
 closely follows the circuits described in application note [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf).
 
+The Modem HAT was successfully tested on the [Shadytel](https://shady.tel/) phone network at Toorcamp 2022.
+
 **NOTE: Whatever your jurisdiction, we're pretty positive that connecting this device to the public phone system IS NOT LEGAL! Don't blame us if you get into trouble.**
 
 ## Raspberry Pi Configuration
