@@ -88,7 +88,7 @@ Usually the modem boot config and interrupt pins are not electrically connected 
 
 Large parts of the HAT are based on the hardware design reference in application note [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 4. Where applicable, identical component designators are used to simplify cross-referencing. 
 
-I used solder paste, stencil and reflow oven for assembly of my HAT. If you plan to hand-solder your unit, you may want to replace U3, the only QFN part, with a 74LVC541 in TSSOP-20 package.
+I used solder paste, stencil and reflow oven for assembly of the HAT. I also ordered partially assembled boards from JLCPCB, and manually soldered the parts that they didn't have in stock (modem chipset and high-voltage capacitors).
 
 ### Modem
 
