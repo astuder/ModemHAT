@@ -2,7 +2,7 @@
 
 This HAT is a modem that connects the Raspberry Pi to a plain old analog telephone line.
 
-![Render of Modem HAT](images/modem-hat-2022-06-11-render.png)
+![Render of Modem HAT](images/modem-hat-2024-06-11-render.png)
 
 The modem presents itself to the Raspberry Pi on UART4 and is controlled with the classic AT command set. It supports various standards (V.22bis, V.32bis, V.34, V.90, ...) at speeds of up to 56 kbps.
 
