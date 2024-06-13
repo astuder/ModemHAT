@@ -4,7 +4,7 @@ This HAT is a modem that connects the Raspberry Pi to a plain old analog telepho
 
 ![Render of Modem HAT](images/modem-hat-2024-06-11-render.png)
 
-The modem presents itself to the Raspberry Pi on UART4 and is controlled with the classic AT command set. It supports various standards (V.22bis, V.32bis, V.34, V.90, ...) at speeds of up to 56 kbps.
+The modem presents itself to the Raspberry Pi on an UART and is controlled with the classic AT command set. It supports various standards (V.22bis, V.32bis, V.34, V.90, ...) at speeds of up to 56 kbps.
 
 The design is based on a [Skyworks ISOmodem](https://www.skyworksinc.com/en/Products/Modems-and-DAAs/Data-and-Voice-Modems) chipset, specifically [Si2457](https://www.skyworksinc.com/en/Products/Modems-and-DAAs/Data-and-Voice-Modems/Si2457) data modem and Si3018 line side driver. The implementation
 closely follows the circuits described in application note [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf).
@@ -16,40 +16,50 @@ The Modem HAT was successfully tested on the [Shadytel](https://shady.tel/) phon
 
 ## Raspberry Pi Configuration
 
-The modem HAT requires a Raspberry Pi 4 or newer. 
-
 > [!NOTE]
-> This information was tested on a Raspberry Pi 4 running Raspberry Pi OS 12 (Bookworm). There may be differences for other versions of the Pi and/or Pi OS.
+> This information was tested on Raspberry Pi 4 and Raspberry 5, running Raspberry Pi OS 12 (Bookworm). There may be differences for other versions of the Pi and/or Pi OS.
 
-The modem connects to the Raspberry Pi UART4 and requires CTS and RTS for flow control. To enable UART4 with CTS/RTS, edit `/boot/firmware/config.txt` and add the following line at the end of the file:
+The modem HAT requires a Raspberry Pi 4 or newer.
+
+The modem communicates through the Pi's UART on GPIO 8-11, and requires CTS and RTS for flow control. The modem supports automatic baudrate detection at speeds up to 307.2 kps.
+
+Before first use after power-up, the modem needs to be reset. To reset the modem, GPIO25 (pin 22) is set low for at least 500ms, then set high, followed by a delay of at least 300ms. 
+
+By default, the modem is configured for operation in the United States. For other countries the modem may have to be reconfigured after reset. See [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 6.2 for details. 
+
+Below are the configuration steps for Raspberry Pi 4 and Raspberry Pi 5.
+
+### Raspberry Pi 4
+
+To enable the UART, edit `/boot/firmware/config.txt` and add the following line at the end of the file:
 
 `dtoverlay=uart4,ctsrts`
 
-After rebooting the Raspberry Pi, UART4 will be mapped to `/dev/ttyAMA4`.
+After rebooting the Raspberry Pi, the UART is mapped to `/dev/ttyAMA4`.
 
-The modem is configured for automatic baudrate detection, supporting any standard DTE rate up to 307.2 kps. 
+To reset the modem, run the Python script [`reset-pi4.py`](python/reset-pi4.py).
 
-## Modem Reset
+The modem is now ready to use. For example connect to the modem by running:
 
-Before first use after power-up, the modem must be reset by the Raspberry Pi.
+`screen /dev/ttyAMA4 115200`
 
-To reset the modem, GPIO25 (pin 22) is set low for at least 500ms, then set high, followed by a delay of at least 300ms. This can be done with the following Python script.
+Once connected to the modem, if you type `at` and press enter, the modem should respond with `OK`.
 
-```
-import RPi.GPIO as GPIO
-import time
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(25, GPIO.OUT)
-GPIO.output(25, GPIO.LOW)
-time.sleep(0.5)
-GPIO.output(25, GPIO.HIGH)
-time.sleep(0.3)
-```
+### Raspberry Pi 5
 
-> [!NOTE]
-> RPi.GPIO is not supported on the Raspberry Pi 5.
+To enable the UART, edit `/boot/firmware/config.txt` and add the following line at the end of the file:
 
-By default, the modem is configured for operation in the United States. For other countries the modem will need to be reconfigured after reset. See [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 6.2 for details. 
+`dtoverlay=uart3-pi5,ctsrts`
+
+After rebooting the Raspberry Pi, the UART is mapped to `/dev/ttyAMA3`.
+
+To reset the modem, run the Python script [`reset-pi4.py`](python/reset-pi5.py).
+
+The modem is now ready to use. For example connect to the modem by running:
+
+`screen /dev/ttyAMA3 115200`
+
+Once connected to the modem, if you type `at` and press enter, the modem should respond with `OK`.
 
 ## AT Command Set
 
@@ -64,11 +74,12 @@ Required connections:
 |-|-|
 |1|3.3V power for modem chipset|
 |2,4|5V power for audio amplifier|
-|19|UART4 CTS|
-|21|UART4 RX|
+|6|GND|
+|19|UART CTS|
+|21|UART RX|
 |22|Modem reset, RPi GPIO25|
-|23|UART4 RTS|
-|24|UART4 TX|
+|23|UART RTS|
+|24|UART TX|
 
 Optional connections:
 |Pin|Description|
@@ -80,7 +91,7 @@ Optional connections:
 |27|RPi config EEPROM SDA|
 |28|RPi config EEPROM SCL|
 
-Usually the modem boot config and interrupt pins are not electrically connected to the Rasbperry Pi GPIO header. Populate R29-R32 with 0-ohm resistors to use these pins.
+In the standard configuration of the HAT, the modem boot config and interrupt pins are not electrically connected to the Rasbperry Pi GPIO header. Populate R29-R32 with 0-ohm resistors to use these pins.
 
 ## Building Your Own HAT
 
@@ -89,6 +100,8 @@ Usually the modem boot config and interrupt pins are not electrically connected 
 Large parts of the HAT are based on the hardware design reference in application note [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 4. Where applicable, identical component designators are used to simplify cross-referencing. 
 
 I used solder paste, stencil and reflow oven for assembly of the HAT. I also ordered partially assembled boards from JLCPCB, and manually soldered the parts that they didn't have in stock (modem chipset and high-voltage capacitors).
+
+After soldering the through-hole parts (RJ11 connector, speaker), make sure to clip the leads on the bottom side of the HAT to avoid shorting with metal parts on the Raspberry Pi.
 
 ### Modem
 
@@ -120,13 +133,13 @@ To enable audio output on the speaker, make sure MUTE switch is set towards the 
 
 The modem boot config EEPROM is optional and can store AT commands that the modem automatically runs after reset. See [AN93](https://www.skyworksinc.com/-/media/SkyWorks/SL/documents/public/application-notes/AN93.pdf) chapter 2.7 for details.
 
-The EEPROM can be programmed by the modem with AT commands. For hacking, the EEPROM can also be connected to the Raspberry Pi by populating R29, R30 and R31. For the latter, keep the modem in reset while interacting with the EEPROM. 
+The EEPROM can be programmed by the modem with AT commands. For hacking, the EEPROM can also be connected to the Raspberry Pi by populating R29, R30 and R31. For the latter, keep the modem in reset while interacting with the EEPROM.
 
 If this functionality is not needed, the EEPROM (U6) and associated parts (C22, R26, R27, R28) can be left unpopulated.
 
 ### Raspberry Pi HAT ID EEPROM
 
-The HAT ID EEPROM is optional and can store information that allows the Raspberry Pi to recognize the HAT and load the required device tree overlay, i.e. automatically configure UART4 and other pins.
+The HAT ID EEPROM is optional and can store information that allows the Raspberry Pi to recognize the HAT and load the required device tree overlay, i.e. automatically configure UART and other pins.
 
 I haven't figured out the content for this EEPROM yet. Specification is [here](https://github.com/raspberrypi/hats/blob/master/eeprom-format.md). Contributions are welcome :)
 
