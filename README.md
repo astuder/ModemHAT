@@ -53,7 +53,7 @@ To enable the UART, edit `/boot/firmware/config.txt` and add the following line 
 
 After rebooting the Raspberry Pi, the UART is mapped to `/dev/ttyAMA3`.
 
-To reset the modem, run the Python script [`reset-pi4.py`](python/reset-pi5.py).
+To reset the modem, run the Python script [`reset-pi5.py`](python/reset-pi5.py).
 
 The modem is now ready to use. For example connect to the modem by running:
 
