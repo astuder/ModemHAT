@@ -12,7 +12,7 @@ closely follows the circuits described in application note [AN93](https://www.sk
 The Modem HAT was successfully tested on the [Shadytel](https://shady.tel/) phone network at Toorcamp 2022.
 
 > [!CAUTION]
-> NOTE: Whatever your jurisdiction, we're pretty positive that connecting this device to the public phone system IS NOT LEGAL! Don't blame us if you get into trouble.
+> Whatever your jurisdiction, we're pretty positive that connecting this device to the public phone system IS NOT LEGAL! Don't blame us if you get into trouble.
 
 ## Raspberry Pi Configuration
 
